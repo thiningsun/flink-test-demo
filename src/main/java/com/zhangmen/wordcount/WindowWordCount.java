@@ -48,7 +48,7 @@ public class WindowWordCount {
         }).withBroadcastSet(toBroadcast, "broadcastSetName");// 第二步广播数据集
 
         stringStringMapOperator.printToErr();
-        env.execute();
+        env.execute(WindowWordCount.class.getName());
     }
 
 

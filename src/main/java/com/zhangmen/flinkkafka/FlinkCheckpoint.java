@@ -1,10 +1,7 @@
 package com.zhangmen.flinkkafka;
 
-
-import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.state.filesystem.FsStateBackend;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -14,7 +11,6 @@ import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer011;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -45,26 +41,22 @@ public class FlinkCheckpoint {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         env.setParallelism(4);
-        String topic = "arlen_test";
+        String topic = "zsq_test";
+
         //source
-        FlinkKafkaConsumer010<String> kafkaConsumer = new FlinkKafkaConsumer011<String>(topic, new SimpleStringSchema(), getKafkaProperties());
-//        kafkaConsumer.setStartFromEarliest();
+        FlinkKafkaConsumer011<String> kafkaConsumer = new FlinkKafkaConsumer011<String>(topic, new SimpleStringSchema(), getKafkaProperties());
         kafkaConsumer.setStartFromLatest();
 //        kafkaConsumer.setStartFromGroupOffsets();
-
         DataStreamSource<String> dataStreamSource = env.addSource(kafkaConsumer);
-//        dataStreamSource.print();
-
-        /*SingleOutputStreamOperator<String> stringSingleOutputStreamOperator = dataStreamSource.assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<String>(Time.seconds(5)) {
+        SingleOutputStreamOperator<String> stringSingleOutputStreamOperator = dataStreamSource.assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<String>(Time.seconds(5)) {
             @Override
             public long extractTimestamp(String element) {
                 String[] split = element.split(",");
                 return Long.parseLong(split[2]);
             }
-        });*/
+        });
 
-//        dataStreamSource.rebalance();
-
+        stringSingleOutputStreamOperator.print();
         env.execute("FlinkCheckpoint");
     }
 

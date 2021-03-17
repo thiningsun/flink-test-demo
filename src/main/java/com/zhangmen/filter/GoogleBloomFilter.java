@@ -1,3 +1,4 @@
+/*
 package com.zhangmen.filter;
 
 import com.google.common.hash.BloomFilter;
@@ -16,3 +17,4 @@ public class GoogleBloomFilter {
         System.out.println(filter.mightContain("www.baidu.com"));
     }
 }
+*/

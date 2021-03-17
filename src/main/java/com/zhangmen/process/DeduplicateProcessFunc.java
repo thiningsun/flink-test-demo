@@ -1,3 +1,4 @@
+/*
 package com.zhangmen.process;
 
 import com.google.common.base.Stopwatch;
@@ -11,9 +12,7 @@ import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author jinxing.zhang
- */
+
 @Slf4j
 public class DeduplicateProcessFunc extends KeyedProcessFunction<String, Map, String> {
 
@@ -52,3 +51,4 @@ public class DeduplicateProcessFunc extends KeyedProcessFunction<String, Map, St
         }
     }
 }
+*/

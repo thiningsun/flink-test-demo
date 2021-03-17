@@ -13,6 +13,7 @@ public class AsycnFunctionTest {
     public static void main(String[] args) {
 
         long l = TimeUnit.MILLISECONDS.toMillis(5000);
+        System.out.println(l);
 
     }
 

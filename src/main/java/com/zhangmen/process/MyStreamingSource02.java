@@ -1,3 +1,4 @@
+/*
 package com.zhangmen.process;
 
 import akka.japi.tuple.Tuple4;
@@ -23,12 +24,14 @@ public class MyStreamingSource02 implements SourceFunction<Item> {
 
     private boolean isRunning = true;
 
-    /**
+    */
+/**
      * 重写run方法产生一个源源不断的数据发送源
      *
      * @param ctx
      * @throws Exception
-     */
+     *//*
+
     public void run(SourceContext<Item> ctx) throws Exception {
         while (isRunning) {
             Item item = generateItem();
@@ -117,3 +120,4 @@ class StreamingDemo02 {
     }
 
 }
+*/

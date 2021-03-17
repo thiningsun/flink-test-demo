@@ -13,6 +13,7 @@ public class UDFWordCount extends TableFunction<Row> {
     public TypeInformation<Row> getResultType() {
         return Types.ROW(Types.STRING, Types.INT);
     }
+
     /*消息处理*/
     public void eval(String line){
         String[] wordSplit=line.split(",");

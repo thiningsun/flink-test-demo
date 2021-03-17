@@ -17,7 +17,7 @@ public class AsyncMysqlRequest {
 //        env.setParallelism(1);
         DataStreamSource<String> source = env.readTextFile("D:\\workspace\\flink_arlen_test\\data\\async.txt");
 
-        // 接收kafka数据，转为User 对象
+        // 模拟接收kafka数据，转为User 对象
         DataStream<AsyncUser> input = source.map(value -> {
             JSONObject json = JSON.parseObject(value);
             String id = json.get("id").toString();
@@ -27,13 +27,15 @@ public class AsyncMysqlRequest {
             return new AsyncUser(id, username, password);
         });
 
+        input.printToErr();
+
         // 异步IO 获取mysql数据, timeout 时间 1s，容量 10（超过10个请求，会反压上游节点）
         SingleOutputStreamOperator<AsyncUser> async = AsyncDataStream.
                 orderedWait(input,
                 new AsyncFunctionForMysqlJava02(),
                 5000,
                 TimeUnit.MICROSECONDS,
-                5);
+                5).setParallelism(5);
 
         async.map(user -> JSON.toJSON(user).toString()+"========").print();
 

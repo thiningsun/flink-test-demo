@@ -169,6 +169,7 @@ public class BroadCastWordCountExample2 {
             @Override
             public void processElement(JSONObject value, ReadOnlyContext ctx, Collector<String> out) throws Exception {
                 JSONObject getBroad = ctx.getBroadcastState(mapStateDes).get("a");
+//                String broadCast1 = "{'condition_id':'1','firstAction':'进入','secondAction':'购物','topic':'进入+购物'}";
                 String currentKey = ctx.getCurrentKey();
 
                 String prevAction = prevActionState.value();

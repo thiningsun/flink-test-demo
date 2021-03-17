@@ -6,6 +6,7 @@ import org.apache.flink.streaming.api.functions.async.RichAsyncFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +21,7 @@ public class AsyncFunctionForMysqlJava extends RichAsyncFunction<AsyncUser, Asyn
     private transient MysqlClient client;
     private transient ExecutorService executorService;
     private SimpleDateFormat sdf;
+
 
     /**
      * open 方法中初始化链接
@@ -52,7 +54,12 @@ public class AsyncFunctionForMysqlJava extends RichAsyncFunction<AsyncUser, Asyn
         executorService.submit(() -> {
             // submit query
             System.out.println("submit query : " + asyncUser.getId() + "-1-" + System.currentTimeMillis());
-            AsyncUser tmp = client.query1(asyncUser);
+            AsyncUser tmp = null;
+            /*try {
+                tmp = client.query1(asyncUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }*/
             //            return tmp;
             // 一定要记得放回 resultFuture，不然数据全部是timeout 的
             resultFuture.complete(Collections.singletonList(tmp));
@@ -91,7 +98,6 @@ public class AsyncFunctionForMysqlJava extends RichAsyncFunction<AsyncUser, Asyn
         System.out.println("++++++++++++++++"+format);
         resultFuture.complete(list);
     }
-
 
 
 

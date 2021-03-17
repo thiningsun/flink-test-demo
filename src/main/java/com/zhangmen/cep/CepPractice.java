@@ -66,7 +66,5 @@ public class CepPractice {
         matchStream.printToErr();
         env.execute("execute cep");
 
-
-
     }
 }

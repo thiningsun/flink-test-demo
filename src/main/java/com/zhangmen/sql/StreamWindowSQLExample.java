@@ -60,6 +60,7 @@ public class StreamWindowSQLExample {
                 "FROM orders\n" +
                 "GROUP BY TUMBLE(ts, INTERVAL '5' SECOND)";
         Table result = tEnv.sqlQuery(query);
+
         tEnv.toAppendStream(result, Row.class).print();
 
         // after the table program is converted to DataStream program,

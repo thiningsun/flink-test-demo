@@ -1,3 +1,4 @@
+/*
 package com.zhangmen.process;
 
 import com.alibaba.fastjson.JSON;
@@ -22,11 +23,13 @@ import java.util.Set;
 public class MyStreamingSource implements SourceFunction<Item> {
     private boolean isRunning = true;
 
-    /**
+    */
+/**
      * 重写run方法产生一个源源不断的数据发送源
      * @param ctx
      * @throws Exception
-     */
+     *//*
+
     @Override
     public void run(SourceContext<com.zhangmen.bean.Item> ctx) throws Exception {
         while(isRunning){
@@ -115,3 +118,4 @@ class StreamingDemo {
     }
 }
 
+*/
