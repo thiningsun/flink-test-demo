@@ -94,8 +94,6 @@ public class FlinkSinkToES {
         student.addSink(esSinkBuilder.build());
         env.execute("flink learning connectors kafka");
 
-
-
     }
 
 }

@@ -50,6 +50,13 @@ public class CepPractice {
                     public boolean filter(Tuple3<String, String, Long> value) throws Exception {
                         return value.f1.equals("帽子");
                     }
+                })
+                .next("middle")
+                .where(new SimpleCondition<Tuple3<String, String, Long>>() {
+                    @Override
+                    public boolean filter(Tuple3<String, String, Long> value) throws Exception {
+                        return value.f1.equals("帽子");
+                    }
                 });
 
 
